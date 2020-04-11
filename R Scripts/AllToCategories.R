@@ -1,6 +1,6 @@
 #################################################################################################
 # 01. DATASET CREATION
-
+# Structuring the data
 # The aim of this script is to create a dataset with the following information:
 #   - Name of the article
 #   - Content of the article
@@ -69,4 +69,4 @@ save(df_final, file='Dataset.rda')
 load(file='Dataset.rda')
 
 # Write csv to import to python
-write.csv2(df_final,fileEncoding = 'utf8', "News & BBC.csv", row.names = FALSE)
+write.csv2(df_final,fileEncoding = 'utf8', "StructuredData.csv", row.names = FALSE)
