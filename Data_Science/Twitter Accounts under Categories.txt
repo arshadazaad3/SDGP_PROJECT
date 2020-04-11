@@ -1,0 +1,11 @@
+space =  SpaceX, NASAKepler,NASA
+
+health&environment = MedlinePlus, goodhealth,World_Wildlife
+
+sports =BBCSport
+
+politics = CNNPolitcs
+
+Tech = TheNextWeb, recode,TechCrunch
+
+Business =Forbes, WSJ, Entrepreneur
