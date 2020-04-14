@@ -21,7 +21,7 @@ rm(list = ls())
 stewd('E:/Studies/Give A Try/SDGPR Scripts')
 
 # Path definition of the news archives
-path <- 'E:/Studies/Give A Try/SDGP/Data Set/News & BBC'
+path <- '../../../Data Set/News & BBC'
 
 
 

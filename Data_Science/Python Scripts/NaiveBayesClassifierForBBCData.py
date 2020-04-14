@@ -2,7 +2,7 @@ import sklearn.datasets as skd
 
 
 categories = ['entertainment', 'business', 'politics', 'sport', 'tech', 'space']
-news_train = skd.load_files('E:\Studies\Give A Try\SDGP\Data Set\\News & BBC', categories=categories,
+news_train = skd.load_files('/Data Set/News & BBC', categories=categories,
                             encoding='ISO-8859-1')
 # news_test = skd.load_files('E:\Studies\Give A Try\SDGP\Data Set\\News-bydate-test', categories=categories,
 #                            encoding='ISO-8859-1')
@@ -23,7 +23,7 @@ X_train_tfidf = tfidf_transformer.fit_transform(X_train_tf)
 from sklearn.naive_bayes import MultinomialNB
 
 clf = MultinomialNB().fit(X_train_tfidf, news_train.target)
-docs_new = ["astronaut works hard"]
+docs_new = ["ten year challenge", "He is a real threat for us", "i came home from those planes", ""]
 X_new_counts = count_vect.transform(docs_new)
 X_new_tfidf = tfidf_transformer.transform(X_new_counts)
 predicted = clf.predict(X_new_tfidf)
