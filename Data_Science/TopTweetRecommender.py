@@ -1,14 +1,10 @@
+from numpy import sort
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 
-# Step 1: Read CSV file
-df = pd.DataFrame(pd.read_excel('EnvironmentTweets.xlsx'))
-df_selected = df.iloc[2:]
+import pymongo
 
-
-# def get_index_from_tweet(tweet):
-#     return df[df.data == tweet]["index"].values[0]
 
 def get_tweet_from_index(index):
     return df_selected[df_selected.index == index]["data"].values[0]
@@ -41,11 +37,38 @@ def getRecommendation():
     toptweet = sorted_similar_tweets[1][0]
     return toptweet
 
-def runTopTweetRecommender():
-    toptweet = getRecommendation()
-    record = [(df.iloc[1][1], get_tweet_from_index(toptweet + 2))]
-    data_to_append = pd.DataFrame(record)
-    data_to_append.to_csv("faz.csv", mode='a', header=False)
+def runTopTweetRecommender(hashtag):
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["SDGP"]
+    mycol = mydb[hashtag]
 
-runTopTweetRecommender()
+    df = pd.DataFrame(mycol.find())
+    df = df.drop(columns=['_id'])
+
+    global df_selected
+    df_selected = df.iloc[2:]
+
+
+    toptweet = getRecommendation()
+    # record = [(df.iloc[1][1], get_tweet_from_index(toptweet + 2))]
+    # data_to_append = pd.DataFrame(record)
+    # data_to_append.to_csv("faz.csv", mode='a', header=False)
+
+    category = df.iloc[0]['data']
+
+    resultCol = mydb[category]
+
+    # prev = mycol.find().skip(mycol.count() - 1)
+    prev = resultCol.find_one({},sort=[('_id', pymongo.DESCENDING)])
+    print("latestttt")
+    latest_index = prev['index']
+
+
+
+    result = {"index":latest_index+1,"hashtag":df.iloc[1][1], "tweet":get_tweet_from_index(toptweet + 2)}
+
+    print(result)
+    resultCol.insert_one(result)
+
+runTopTweetRecommender("SaveAustralia")
 

@@ -1,10 +1,7 @@
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
-
-# Step 1: Read CSV file
-df = pd.DataFrame(pd.read_excel('EnvironmentHashtags.xlsx'))
-
+import pymongo
 
 
 def get_index_from_hashtag(hashtag):
@@ -56,5 +53,22 @@ def getRecommendation(input_hashtag):
         print(get_hashtag_from_index(tweet[0]))
 
 
-getRecommendation("#saveAustralia")
+
+def runTopHashtagRecommender(hashtag,category):
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["SDGP"]
+    mycol = mydb[category]
+
+    global df
+    df = mycol.find()
+    df = pd.DataFrame(df)
+    print(df)
+
+    getRecommendation(hashtag)
+
+
+
+runTopHashtagRecommender("SaveAustralia","Environment")
+
+
 
