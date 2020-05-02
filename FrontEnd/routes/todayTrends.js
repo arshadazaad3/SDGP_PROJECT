@@ -4,7 +4,9 @@ let TodayTopSearches = require('../models/todayTrends.model');
 const mongoose = require('mongoose');
 
 router.route('/').get((req, res) => {
-    mongoose.connect('mongodb://localhost:27017/' + 'whatIsSearchedToday' + '?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+    // mongoose.connect('mongodb://localhost:27017/' + 'whatIsSearchedToday' + '?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+    mongoose.connect('mongodb+srv://root1:sdgp1234@sdgp1-fmfys.mongodb.net/whatIsSearchedToday?authSource=admin&replicaSet=sdgp1-shard-0&readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=true', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+
 
     const connection = mongoose.connection;
 
