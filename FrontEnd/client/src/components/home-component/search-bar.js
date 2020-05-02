@@ -69,7 +69,7 @@ class HomePage extends React.Component {
         search: this.state.search,
 
       }
-      axios.post('http://localhost:5000/search/add', searchKeyword)
+      axios.post('http://sdgp-spoton-99.herokuapp.com/search/add', searchKeyword)
         .then(res => console.log(res.data));
 
       console.log(searchKeyword);

@@ -49,7 +49,6 @@ export default class ExercisesList extends Component {
         })
     }
 
-
     render() {
         return (
             <div>

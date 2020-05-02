@@ -21,32 +21,23 @@ const resultsRouter = require('./routes/dashboard.results.route');
 const browseRouter = require('./routes/browse');
 
 const subscribeRouter = require('./routes/subscribe');
-
-
 const todayTrendsRouter = require('./routes/todayTrends');
-
-
 
 app.use('/search', searchRouter);
 app.use('/search/results', resultsRouter);
 app.use('/browse', browseRouter);
 app.use('/subscribe', subscribeRouter);
-
 app.use('/todayTrends', todayTrendsRouter)
 
-
 function whatsTrendingTodayPython(req, res) {
-
 
     var spawn = require("child_process").spawn;
     var process = spawn('python', ["./pyFiles/whatisSearchedToday.py"
     ]);
-
 }
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'));
-
     app.get('*',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'client','build','index.html'));
     })
