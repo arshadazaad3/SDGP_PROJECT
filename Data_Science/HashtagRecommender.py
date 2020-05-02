@@ -46,5 +46,5 @@ def getRecommendation(input_hashtag):
         print(get_hashtag_from_index(tweet[0]))
 
 
-getRecommendation("#saveAustralia")
+getRecommendation("#coronaVirus")
 
