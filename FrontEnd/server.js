@@ -14,8 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 
-
-// const exercisesRouter= require('./routes/exercises');
+// routers for appp
 const searchRouter = require('./routes/searchKeyword');
 const resultsRouter = require('./routes/dashboard.results.route');
 const browseRouter = require('./routes/browse');
@@ -29,6 +28,8 @@ app.use('/browse', browseRouter);
 app.use('/subscribe', subscribeRouter);
 app.use('/todayTrends', todayTrendsRouter)
 
+
+//function to run python file what is Searched Today 
 function whatsTrendingTodayPython(req, res) {
 
     var spawn = require("child_process").spawn;
@@ -36,6 +37,7 @@ function whatsTrendingTodayPython(req, res) {
     ]);
 }
 
+//Build Process Fro Heruko
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'));
     app.get('*',(req,res)=>{

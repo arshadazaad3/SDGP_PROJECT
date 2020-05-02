@@ -3,8 +3,6 @@ import pymongo
 import pandas as pd
 from pytrends.request import TrendReq
 
-
-
 #connect to Mongo DB Server
 # client =MongoClient("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false")
 
