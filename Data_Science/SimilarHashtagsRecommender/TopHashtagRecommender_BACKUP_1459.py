@@ -2,6 +2,11 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import pymongo
+import json
+
+# Step 1: Read CSV file
+# df = pd.DataFrame(pd.read_excel('EnvironmentHashtags.xlsx'))
+#
 
 
 def get_index_from_hashtag(hashtag):
@@ -22,7 +27,7 @@ def getRecommendation(input_hashtag):
     df["combined_features"] = df.apply(combine_features, axis=1)
 
     pd.set_option('display.max_columns', None)
-    print(df)
+    # print(df)
 
 
     # Step 4: Create count matrix from this new combined column
@@ -34,7 +39,7 @@ def getRecommendation(input_hashtag):
     # Step 5: Compute cosine similarity based on count_matrix
     cosine_sim = cosine_similarity(count_matrix)
 
-    print(cosine_sim)
+    # print(cosine_sim)
 
     hashtag_user_likes = input_hashtag
 
@@ -46,12 +51,18 @@ def getRecommendation(input_hashtag):
     # Step 7: Get a list of similar movies in descending order of similarity score
     sorted_similar_hashtags = sorted(similar_hashtags, key=lambda x: x[1], reverse=True)
 
-    print(sorted_similar_hashtags)
+    # print(sorted_similar_hashtags)
     # Step 8: Print titles of first 50 movies
 
-    for tweet in sorted_similar_hashtags:
-        print(get_hashtag_from_index(tweet[0]))
+    results = []
+    # for tweet in sorted_similar_hashtags:
+    #     print(get_hashtag_from_index(tweet[0]))
+    #
+    for i in range(0,5):
+        tweet = sorted_similar_hashtags[i]
+        results.append(get_hashtag_from_index(tweet[0]))
 
+    return results
 
 
 def runTopHashtagRecommender(hashtag,category):
@@ -62,13 +73,19 @@ def runTopHashtagRecommender(hashtag,category):
     global df
     df = mycol.find()
     df = pd.DataFrame(df)
-    print(df)
+    # print(df)
 
-    getRecommendation(hashtag)
-
-
-
-runTopHashtagRecommender("SaveAustralia","Environment")
+    top5Results = getRecommendation(hashtag)
+    json_str = json.dumps(top5Results)
+    return json_str
 
 
+
+# runTopHashtagRecommender("SaveAustralia","Environment")
+
+
+<<<<<<< HEAD:Data_Science/HashtagRecommender.py
+getRecommendation("#coronaVirus")
+=======
+>>>>>>> 2e3b6d3ccb4fee8295f5a844763a19f737f39b95:Data_Science/SimilarHashtagsRecommender/TopHashtagRecommender.py
 
