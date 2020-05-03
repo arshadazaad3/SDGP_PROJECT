@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 //route for top trends (/)
 router.route('/').get((req, res) => {
+    whatsTrendingTodayPython();
 
     //local db 
     // mongoose.connect('mongodb://localhost:27017/' + 'whatIsSearchedToday' + '?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
@@ -26,5 +27,14 @@ router.route('/').get((req, res) => {
         .then(users => res.json(users))
         .catch(err => res.status(400).json('Error:' + err));
 })
+
+
+//function to run python file what is Searched Today 
+function whatsTrendingTodayPython(req, res) {
+
+    var spawn = require("child_process").spawn;
+    var process = spawn('python', ["./pyFiles/whatisSearchedToday.py"
+    ]);
+}
 
 module.exports = router;

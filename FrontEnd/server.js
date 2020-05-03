@@ -29,13 +29,7 @@ app.use('/subscribe', subscribeRouter);
 app.use('/todayTrends', todayTrendsRouter)
 
 
-//function to run python file what is Searched Today 
-function whatsTrendingTodayPython(req, res) {
 
-    var spawn = require("child_process").spawn;
-    var process = spawn('python', ["./pyFiles/whatisSearchedToday.py"
-    ]);
-}
 
 //Build Process Fro Heruko
 if(process.env.NODE_ENV === 'production'){
@@ -48,5 +42,4 @@ if(process.env.NODE_ENV === 'production'){
 //log if port connection success
 app.listen(port, () => {    
     console.log('Server is running on port : ' + port);
-    whatsTrendingTodayPython();
 })
