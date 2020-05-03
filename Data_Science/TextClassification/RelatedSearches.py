@@ -1,11 +1,8 @@
-from _ast import keyword
-
-from pytrends.request import TrendReq
-import pandas as pd
-import sys
-import tweepy
 import datetime
 from datetime import date
+
+import tweepy
+from pytrends.request import TrendReq
 
 # Authentication to twitter
 auth = tweepy.OAuthHandler("OVTdS84lJEILeeldhGCUZYNqg", "6QRG9zAdezggILyzPcKH2wzpSHqmpsKSlNXTTPMADrGVQ6lKLr")
@@ -52,6 +49,8 @@ related_searches_list = []
 related_searches_list.append(keywordToSearch)
 for i in range(0, 5):
     related_searches_list.append(risingValues['query'][i])
-    print(risingValues['query'][i])
+    # print(risingValues['query'][i])
 
 print(related_searches_list)
+
+
