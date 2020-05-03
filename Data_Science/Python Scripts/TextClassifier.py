@@ -2,7 +2,7 @@ import pickle
 
 import sklearn.datasets as skd
 
-categories = ['business', 'entertainment','politics', 'sport', 'tech', 'space', 'med']
+categories = ['business', 'entertainment','politics', 'sport', 'tech', 'space', 'health_environment']
 print()
 news_train = skd.load_files('E:\Studies\Give A Try\SDGP\Data Set\\News & BBC', categories= categories, encoding= 'ISO-8859-1')
 news_test = skd.load_files('E:\Studies\Give A Try\SDGP\Data Set\\News & BBC',categories= categories, encoding= 'ISO-8859-1')

@@ -14,7 +14,8 @@ api = tweepy.API(auth)
 # access google trends api
 pytrend = TrendReq()
 
-keywordToSearch = "ronaldo"  # python keyword
+# keywordToSearch = ''  # python keyword
+keywordToSearch = "corona"  # python keyword
 # The keywordToSearch will get the value from the inedx.js file. When we run the index.js file,
 # the RelatedSearches.py file will get executed automatically
 user_keyword_list = [keywordToSearch]
@@ -50,6 +51,3 @@ related_searches_list.append(keywordToSearch)
 for i in range(0, 5):
     related_searches_list.append(risingValues['query'][i])
     # print(risingValues['query'][i])
-
-
-
