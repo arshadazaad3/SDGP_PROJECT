@@ -43,7 +43,7 @@ export default class ExercisesList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/search/results/youtube')
+        axios.get('https://sdgp-spoton-99.herokuapp.com/search/results/youtube')
             .then(response => {
                 this.setState({ results: response.data })
                 // console.log(se.username)

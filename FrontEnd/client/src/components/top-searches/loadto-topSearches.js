@@ -15,7 +15,7 @@ This is the best place to make API calls since, at this point, the component has
     componentDidMount() {
         axios.get('https://sdgp-spoton-99.herokuapp.com/todayTrends/')
             .then(response => {
-                this.setState({ results: response.data })
+                this.setState({ results: response.data })   
                 // console.log(se.username)
             })
             .catch((error) => {
@@ -28,7 +28,7 @@ This is the best place to make API calls since, at this point, the component has
     render() {
 
         // Action to take place after 2 seconds  (go to specified location)
-        setTimeout(() => window.location = "../top", 2000);
+        setTimeout(() => window.location = "../top", 10000);
         return (
             <div>
                 {this.ShowAlertWithDelay}

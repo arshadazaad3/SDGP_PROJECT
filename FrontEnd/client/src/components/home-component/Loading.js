@@ -15,8 +15,8 @@ class loading extends React.Component {
     render() {
 
 
-        setTimeout(() => window.location = "./results", 25000);
-        setTimeout(() => axios.get('http://localhost:5000/search/add/load/'), 5000);
+        setTimeout(() => window.location = "./results", 50000);
+        setTimeout(() => axios.get('https://sdgp-spoton-99.herokuapp.com/search/add/load/'), 5000);
         return (
             <div>
                 {this.ShowAlertWithDelay}

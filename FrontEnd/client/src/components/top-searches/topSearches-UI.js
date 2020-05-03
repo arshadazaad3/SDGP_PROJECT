@@ -24,7 +24,9 @@ export default class TopSearches extends Component {
     }
 
     componentDidMount() {
+        // axios.get('https://sdgp-spoton-99.herokuapp.com/todayTrends/')
         axios.get('https://sdgp-spoton-99.herokuapp.com/todayTrends/')
+
             .then(response => {
                 this.setState({ results: response.data })
                 // console.log(se.username)

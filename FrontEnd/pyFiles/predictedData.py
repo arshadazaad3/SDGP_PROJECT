@@ -4,9 +4,9 @@ from gnewsclient import gnewsclient
 import pymongo
 import random
 import wikipedia
-from pymongo import MongoClient
 import tweepy
 import datetime
+from pymongo import MongoClient
 from datetime import date
 from pytrends.request import TrendReq
 import urllib
@@ -38,8 +38,10 @@ user_keyword_list = [keywordToSearch]
 user_category = userCategoryFromNode
 
 # connect to Mongo DB Server
-# client = MongoClient("mongodb+srv://root1:sdgp1234@sdgp1-fmfys.mongodb.net/test?retryWrites=true&w=majority") #atlas
-client =MongoClient("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false")
+client = MongoClient("mongodb+srv://root1:sdgp1234@sdgp1-fmfys.mongodb.net/test?retryWrites=true&w=majority") #atlas
+
+#local server
+# client =MongoClient("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false")
 db = client.test  # test connection if connected
 
 # establishing connection with google trends
@@ -417,7 +419,11 @@ except:
     print("No Goolge News")
 
 # connect to Mongo DB Server
-client = MongoClient("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false")
+# client = MongoClient("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false")
+# connect to Mongo DB Server
+client = MongoClient("mongodb+srv://root1:sdgp1234@sdgp1-fmfys.mongodb.net/test?retryWrites=true&w=majority") #atlas
+
+
 db = client.test  # test connection if connected
 db = client[clientdatabaseName]  # open database if not available will be created
 

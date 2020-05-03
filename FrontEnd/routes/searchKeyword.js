@@ -17,21 +17,6 @@ router.route('/add').post((req, res) => {
     
 });
 
-router.route('/add').get((req, res) => {
-    runPythonScriptwhatIsTrending();
-    console.log("get-response-whatIsSearchedToday")
-})
-
-//function to run python file what is Searched Today 
-function runPythonScriptwhatIsTrending(req, res) {
-
-    var spawn = require("child_process").spawn;
-    var process = spawn('python', ["./pyFiles/whatisSearchedToday.py"
-    ]);
-    console.log("Running Python Script : What Is Searched Today")
-}
-
-
 router.route('/add/load').get((req, res) => {
     connectDatabase()
     console.log('Datbase connected after 5 sec')
@@ -58,9 +43,9 @@ function  setDatabaseName() {
 }
 function connectDatabase() {
     
-    // mongoose.connect('mongodb+srv://root1:sdgp1234@sdgp1-fmfys.mongodb.net/' + dbName + '?retryWrites=true&w=majority', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+    mongoose.connect('mongodb+srv://root1:sdgp1234@sdgp1-fmfys.mongodb.net/' + dbName + '?retryWrites=true&w=majority', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
-    mongoose.connect('mongodb://localhost:27017/' + dbName + '?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+    // mongoose.connect('mongodb://localhost:27017/' + dbName + '?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
     const connection = mongoose.connection;
 
