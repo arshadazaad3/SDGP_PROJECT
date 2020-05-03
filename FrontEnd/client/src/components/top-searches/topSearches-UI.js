@@ -3,7 +3,10 @@ import axios from 'axios';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 
+/*This react component displays top trending searches today in the window Top
+It fetches results from MongoDb and populates*/
 
+//props which populates results from array
 const TopSearch = props => (
     <div className="topTrendingRow-1">
         <Fab variant="extended" className="topTrendingRow-fab" style={{ cursor: 'default' }}>
@@ -13,18 +16,21 @@ const TopSearch = props => (
     </div>
 )
 
-export default class ExercisesList extends Component {
+
+//Class Top Searches
+export default class TopSearches extends Component {
     constructor(props) {
         super(props);
 
-
         this.state = { results: [] }
-
-
     }
 
+
+/*This Component runs first once the component is rendered
+This is the best place to make API calls since, at this point, the component has been mounted and is available to the DOM*/
+
     componentDidMount() {
-        axios.get('https://sdgp-spoton-99.herokuapp.com/todayTrends/')
+        axios.get('http://localhost:5000/todayTrends/')
             .then(response => {
                 this.setState({ results: response.data })
                 // console.log(se.username)
@@ -34,19 +40,21 @@ export default class ExercisesList extends Component {
             })
     }
 
-
+//Mapping the results 
     resultList() {
         return this.state.results.map(currentSearch => {
             return <TopSearch topresults={currentSearch} key={currentSearch._id} />
         })
     }
+
+//submit Functiom
     onSubmit(e) {
         e.preventDefault();
         window.location = '/spoton/top/subscribe';
 
     }
 
-
+//Display to UI
     render() {
         return (
             <div>

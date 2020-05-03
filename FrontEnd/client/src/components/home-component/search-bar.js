@@ -1,3 +1,5 @@
+
+//Importing Required Modules
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
@@ -5,19 +7,20 @@ import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import Fab from '@material-ui/core/Fab';
 import Alert from '@material-ui/lab/Alert';
 import { Offline, Online} from "react-detect-offline";
-
 import NoInternet from '../home-component/NoInternet'
 
 
+/*This class displays search bar to Ui and Accepts A keyword with Validation and Passes to BAckend Node Js 
+via axios for processing*/
 
-
-class HomePage extends React.Component {
+class SearchBar extends React.Component {
   constructor(props) {
     super(props);
+// This binding is necessary to make `this` work in the callback
 
     this.onChangeSearch = this.onChangeSearch.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
+//State of two Variables
     this.state = {
       search: '',
 
@@ -27,6 +30,7 @@ class HomePage extends React.Component {
     }
   }
 
+//validate keyword entered 
   validate = () => {
     let searchError: '',
       input = "Invalid input"
@@ -56,7 +60,7 @@ class HomePage extends React.Component {
       search: e.target.value
     });
   }
-
+//submit function once user presses search icon the text is validated and passed to url specified in axios
   onSubmit(e) {
     e.preventDefault();
 
@@ -64,26 +68,21 @@ class HomePage extends React.Component {
     if (isValid) {
       // console.log(this.state);
 
-
       const searchKeyword = {
         search: this.state.search,
 
       }
-      axios.post('http://sdgp-spoton-99.herokuapp.com/search/add', searchKeyword)
+      axios.post('http://localhost:5000/search/add', searchKeyword)
         .then(res => console.log(res.data));
 
       console.log(searchKeyword);
 
-
       window.location = '/spoton/search/loading';
-
 
       this.setState({
         search: '',
         searchError: ''
       })
-
-
 
     }
     else {
@@ -91,7 +90,7 @@ class HomePage extends React.Component {
     }
   }
 
-
+//Render Function to display output 
   render() {
     return (
 
@@ -132,4 +131,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage
+export default SearchBar

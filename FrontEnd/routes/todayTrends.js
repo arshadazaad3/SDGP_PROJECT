@@ -1,8 +1,11 @@
+//this router class lets user to view top treniding topics today 
+
 const router = require('express').Router();
 let TodayTopSearches = require('../models/todayTrends.model');
 
 const mongoose = require('mongoose');
 
+//route for top trends (/)
 router.route('/').get((req, res) => {
 
     //local db 
@@ -18,13 +21,10 @@ router.route('/').get((req, res) => {
     connection.once('open', () => {
         console.log("MongoDB Database connection Success to Get Today Whats trending");
     })
-
+    //using mongooose scheme find the collection and required values
     TodayTopSearches.find()
         .then(users => res.json(users))
         .catch(err => res.status(400).json('Error:' + err));
 })
-
-
-
 
 module.exports = router;
