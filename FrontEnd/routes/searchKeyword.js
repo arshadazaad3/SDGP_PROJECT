@@ -17,6 +17,20 @@ router.route('/add').post((req, res) => {
     
 });
 
+router.route('/add').get((req, res) => {
+    runPythonScriptwhatIsTrending();
+    console.log("get-response-whatIsSearchedToday")
+})
+
+//function to run python file what is Searched Today 
+function runPythonScriptwhatIsTrending(req, res) {
+
+    var spawn = require("child_process").spawn;
+    var process = spawn('python', ["./pyFiles/whatisSearchedToday.py"
+    ]);
+    console.log("Running Python Script : What Is Searched Today")
+}
+
 
 router.route('/add/load').get((req, res) => {
     connectDatabase()

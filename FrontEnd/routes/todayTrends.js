@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 //route for top trends (/)
 router.route('/').get((req, res) => {
-    whatsTrendingTodayPython();
+    // whatsTrendingTodayPython();
 
     //local db 
     // mongoose.connect('mongodb://localhost:27017/' + 'whatIsSearchedToday' + '?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });

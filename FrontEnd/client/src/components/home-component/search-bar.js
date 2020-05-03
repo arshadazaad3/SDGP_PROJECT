@@ -30,6 +30,11 @@ class SearchBar extends React.Component {
     }
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:5000/search/add')
+    
+}
+
 //validate keyword entered 
   validate = () => {
     let searchError: '',
