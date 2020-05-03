@@ -24,7 +24,7 @@ This is the best place to make API calls since, at this point, the component has
     }
 
 
-//renders to UI
+//renders to UI (FrontEnd)
     render() {
 
         // Action to take place after 2 seconds  (go to specified location)
