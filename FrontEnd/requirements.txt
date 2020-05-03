@@ -1,3 +1,12 @@
 pymongo==3.10.1
 pandas==0.25.1
 pytrends==4.7.2
+pycountry==19.8.18
+random==1.1.0
+GoogleNews==1.3.6
+gnewsclient==1.12
+urllib3==1.24.2
+requests==2.22.0
+fake-useragent==0.1.11
+bs4==0.0.1
+nltk==3.4.5

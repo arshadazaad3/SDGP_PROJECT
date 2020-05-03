@@ -73,7 +73,7 @@ class HomePage extends React.Component {
       console.log(searchKeyword);
 
 
-      window.location = '../';
+      // window.location = '../';
 
 
       this.setState({
