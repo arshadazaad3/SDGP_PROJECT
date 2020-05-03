@@ -13,7 +13,7 @@ class loading extends React.Component {
 This is the best place to make API calls since, at this point, the component has been mounted and is available to the DOM*/
 
     componentDidMount() {
-        axios.get('http://localhost:5000/todayTrends/')
+        axios.get('http://sdgp-spoton-99.herokuapp.com/todayTrends/')
             .then(response => {
                 this.setState({ results: response.data })
                 // console.log(se.username)
