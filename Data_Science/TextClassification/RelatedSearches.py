@@ -51,6 +51,5 @@ for i in range(0, 5):
     related_searches_list.append(risingValues['query'][i])
     # print(risingValues['query'][i])
 
-print(related_searches_list)
 
 

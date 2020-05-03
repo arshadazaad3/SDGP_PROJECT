@@ -1,5 +1,5 @@
 import os
-
+import RelatedSearches
 import enchant
 import pandas as pd
 import tweepy
@@ -22,7 +22,9 @@ except:
     print("Error during authentication")
 
 # Defining the search term and the date_since date as variables
-search_word_list = ["#ronaldo", "#Sports", "#realmadrid"]
+# search_word_list = ["#ronaldo", "#Sports", "#realmadrid"]
+related_searches_list = RelatedSearches.related_searches_list
+search_word_list = related_searches_list
 date_since = "2019-10-16"
 
 
@@ -47,7 +49,7 @@ result = pd.concat(frames)
 number_of_rows = result['text'].count()
 
 # Checking if the number of rows are correctly stored (By printing on the console)
-print(number_of_rows)
+# print(number_of_rows)
 
 # Rearranging the index of the data frame "result" beginning from 0 to ........
 result.index = range(number_of_rows)
@@ -96,9 +98,8 @@ for i, row in step_01_filtered_DataFrame.iterrows():
     count += 1
     file1.close()
 
-
 # Calculating the number of rows in the data frame
 number_of_rows = step_01_filtered_DataFrame['text'].count()
 
 # Checking if the number of rows are correctly stored (By printing on the console)
-print(number_of_rows)
+# print(number_of_rows)

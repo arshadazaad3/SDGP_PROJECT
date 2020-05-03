@@ -2,6 +2,8 @@ import os
 import pickle
 
 import sklearn.datasets as skd
+import RelatedSearches
+import tweetScrapeAndSave
 
 # news_test = skd.load_files('E:\Studies\Give A Try\SDGP\Data Set\\Test BBC', encoding='ISO-8859-1')
 news_test = skd.load_files('Test BBC', encoding='ISO-8859-1')
@@ -30,7 +32,7 @@ try:
     final_result_achieved = max(final_result, key=final_result.count)
 except:
     final_result_achieved = "SOME ERROR OCCURRED"
-print(final_result_achieved)
+# print(final_result_achieved)
 
 # After the final result is stored the .txt files are removed
 dir_name = ('Test BBC/business')
