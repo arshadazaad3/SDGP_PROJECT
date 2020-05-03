@@ -3,8 +3,13 @@ import RelatedSearches
 import enchant
 import pandas as pd
 import tweepy
+import json
+from pymongo import MongoClient
+
 
 d = enchant.Dict("en_US")
+
+
 
 # Authentication to twitter
 # Complete authorization and initialize API endpoint
@@ -36,7 +41,7 @@ def collectTweets(keyword_to_search):
     return extractedTweetsDataFrame;
 
 ##############################################################
-def tweetScrapeFunction(search_word_list):
+def tweetScrapeFunction(search_word_list,user_searched_phrase):
     # Creating an empty list which will store the data frames in it
     frames = []
     for i in search_word_list:
@@ -90,19 +95,38 @@ def tweetScrapeFunction(search_word_list):
 
     # Writing the final tweets to txt files
     count = 0
+    finalListOnlyWithText = []
     for i, row in step_01_filtered_DataFrame.iterrows():
         x = step_01_filtered_DataFrame['text'][i]
+        finalListOnlyWithText.append(x)
         filename = str(count) + "dataFile.txt"
         # file1 = open("E:\Studies\Give A Try\SDGP\Data Set\Test BBC\\business\\" + filename + "", "w")
         file1 = open("Test BBC/business/" + filename + "", "w")
         file1.writelines(x)
         count += 1
         file1.close()
+    onlyTextDF = pd.DataFrame(finalListOnlyWithText)
+    onlyTextDF['index'] = range(1, len(onlyTextDF)+1)
+    onlyTextDF=onlyTextDF.rename(columns={0:"text"})
+
+
+    #Save All tweets to Database
+    client = MongoClient("mongodb+srv://root1:sdgp1234@sdgp1-fmfys.mongodb.net/test?retryWrites=true&w=majority")
+    mydb = client[user_searched_phrase]
+    mycol = mydb["Tweets"]
+    mycol.drop()
+    print(onlyTextDF)
+
+    records = json.loads(onlyTextDF.T.to_json()).values()
+    mycol.insert_many(records)
+
+
 
     # Calculating the number of rows in the data frame
     number_of_rows = step_01_filtered_DataFrame['text'].count()
 
     # Checking if the number of rows are correctly stored (By printing on the console)
     # print(number_of_rows)
+
 
 ##############################################################
