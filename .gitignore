@@ -215,7 +215,3 @@ dist
 .tern-port
 >>>>>>> fbabfc4c8f1d20bf2dc791fa60a5925ba8ecc738
 
-# Ignore everything in this directory
-*
-# Except this file
-!.gitignore
