@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 
-
+//constatant to populate results from Array
 const TopSearch = props => (
     <div>
 
@@ -11,7 +11,9 @@ const TopSearch = props => (
     </div >
 )
 
-export default class ExercisesList extends Component {
+//Class which populates the Category Name
+
+export default class CategoryName extends Component {
     constructor(props) {
         super(props);
 
