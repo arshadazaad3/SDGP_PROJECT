@@ -3,7 +3,7 @@ import axios from 'axios';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 
-
+//constant which populates results from array based on the mongo scheme
 const TopSearch = props => (
     <div className="topTrendingRow-1">
         <Fab variant="extended" className="topTrendingRow-fab" style={{ cursor: 'default' }}>
