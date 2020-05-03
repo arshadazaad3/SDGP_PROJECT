@@ -73,7 +73,7 @@ class SearchBar extends React.Component {
         search: this.state.search,
 
       }
-      axios.post('https://sdgp-spoton-99.herokuapp.com/search/add', searchKeyword)
+      axios.post('http://localhost:5000/search/add', searchKeyword)
         .then(res => console.log(res.data));
 
       console.log(searchKeyword);

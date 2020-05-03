@@ -13,19 +13,23 @@ const TopSearch = props => (
     </div>
 )
 
+//Class which displays top Trending Searches today from MongoDB
 export default class TopSearches extends Component {
     constructor(props) {
         super(props);
 
-
+//array yo store results from MongoDB
         this.state = { results: [] }
 
 
     }
 
+    /*This Component runs first once the component is rendered
+This is the best place to make API calls since, at this point, the component has been mounted and is available to the DOM*/
+
     componentDidMount() {
         // axios.get('https://sdgp-spoton-99.herokuapp.com/todayTrends/')
-        axios.get('https://sdgp-spoton-99.herokuapp.com/todayTrends/')
+        axios.get('http://localhost:5000/todayTrends/')
 
             .then(response => {
                 this.setState({ results: response.data })
@@ -36,7 +40,7 @@ export default class TopSearches extends Component {
             })
     }
 
-
+//this function maps the values from array
     resultList() {
         return this.state.results.map(currentSearch => {
             return <TopSearch topresults={currentSearch} key={currentSearch._id} />
@@ -48,7 +52,7 @@ export default class TopSearches extends Component {
 
     }
 
-
+// Render a React element into the DOM in the supplied container and return a reference to the component
     render() {
         return (
             <div>

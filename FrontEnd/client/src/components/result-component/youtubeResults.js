@@ -41,9 +41,11 @@ export default class ExercisesList extends Component {
 
 
     }
+    /*This Component runs first once the component is rendered
+This is the best place to make API calls since, at this point, the component has been mounted and is available to the DOM*/
 
     componentDidMount() {
-        axios.get('https://sdgp-spoton-99.herokuapp.com/search/results/youtube')
+        axios.get('http://localhost:5000/search/results/youtube')
             .then(response => {
                 this.setState({ results: response.data })
                 // console.log(se.username)

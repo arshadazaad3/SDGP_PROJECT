@@ -60,7 +60,7 @@ export default class NewsRelatedClass extends Component {
 This is the best place to make API calls since, at this point, the component has been mounted and is available to the DOM*/
 
     componentDidMount() {
-        axios.get('https://sdgp-spoton-99.herokuapp.com/search/results/newsrelated')
+        axios.get('http://localhost:5000/search/results/newsrelated')
             .then(response => {
                 this.setState({ results: response.data })
                 // console.log(se.username)

@@ -13,14 +13,15 @@ import MostSearchedDate from './mostSearchedDate'
 import SimilarSearches from './similarsearches'
 import PredictedEvent from './predictedevents'
 import CategoryRelated from './CategoryRelated'
+import TopFiveTweets from './TopFiveTweets'
+import axios from 'axios';
 
 
 
+//This is Dashboard which includes all the other results components
 
-
-class loading extends React.Component {
-
-
+class Results extends React.Component {
+   
     render() {
         return (
             <div>
@@ -67,19 +68,15 @@ class loading extends React.Component {
                         <MostSearchedDate></MostSearchedDate>
                     </div>
                     <div className="line-4-right">
-                        <RisingSearches></RisingSearches>
+                        <TopFiveTweets></TopFiveTweets>
 
 
                     </div>
                     <div className="line-4-right">
                         <PredictedEvent></PredictedEvent>
-
                     </div>
 
-
                 </div>
-
-
                 <div className="line-5">
                     <CategoryRelated></CategoryRelated>
                 </div>
@@ -90,14 +87,9 @@ class loading extends React.Component {
                 <div className='line-7'>
                     <NewsResults></NewsResults>
                 </div>
-
-
             </div>
-
         )
-
     }
 }
 
-
-export default loading;
+export default Results;
