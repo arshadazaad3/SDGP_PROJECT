@@ -6,10 +6,7 @@ import tweepy
 import json
 from pymongo import MongoClient
 
-
 d = enchant.Dict("en_US")
-
-
 
 # Authentication to twitter
 # Complete authorization and initialize API endpoint
@@ -40,8 +37,9 @@ def collectTweets(keyword_to_search):
     extractedTweetsDataFrame = pd.DataFrame(pd.DataFrame(t.__dict__ for t in tweets))
     return extractedTweetsDataFrame;
 
+
 ##############################################################
-def tweetScrapeFunction(search_word_list,user_searched_phrase):
+def tweetScrapeFunction(search_word_list, user_searched_phrase):
     # Creating an empty list which will store the data frames in it
     frames = []
     for i in search_word_list:
@@ -106,11 +104,10 @@ def tweetScrapeFunction(search_word_list,user_searched_phrase):
         count += 1
         file1.close()
     onlyTextDF = pd.DataFrame(finalListOnlyWithText)
-    onlyTextDF['index'] = range(1, len(onlyTextDF)+1)
-    onlyTextDF=onlyTextDF.rename(columns={0:"text"})
+    onlyTextDF['index'] = range(1, len(onlyTextDF) + 1)
+    onlyTextDF = onlyTextDF.rename(columns={0: "text"})
 
-
-    #Save All tweets to Database
+    # Save All tweets to Database
     client = MongoClient("mongodb+srv://root1:sdgp1234@sdgp1-fmfys.mongodb.net/test?retryWrites=true&w=majority")
     mydb = client[user_searched_phrase]
     mycol = mydb["Tweets"]
@@ -120,13 +117,10 @@ def tweetScrapeFunction(search_word_list,user_searched_phrase):
     records = json.loads(onlyTextDF.T.to_json()).values()
     mycol.insert_many(records)
 
-
-
     # Calculating the number of rows in the data frame
     number_of_rows = step_01_filtered_DataFrame['text'].count()
 
     # Checking if the number of rows are correctly stored (By printing on the console)
     # print(number_of_rows)
-
 
 ##############################################################

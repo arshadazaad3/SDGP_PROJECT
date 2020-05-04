@@ -1,5 +1,5 @@
 import RelatedSearches
-user_searched_phrase = "corona"
+user_searched_phrase = "telescope"
 related_searches_list = RelatedSearches.myFunction(user_searched_phrase)
 print(related_searches_list)
 import tweetScrapeAndSave
