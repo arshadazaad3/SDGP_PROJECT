@@ -1,74 +1,82 @@
-from numpy import sort
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-import pandas as pd
 
-import pymongo
+#TOP 5 TWEETS
 
-
-def get_tweet_from_index(index):
-    return df_selected[df_selected.index == index]["data"].values[0]
+#returns the tweet of the given index
+def get_tweet_from_index(index,dataframe):
+    return dataframe[dataframe.index == index]["Text"].values[0]
 
 
-def getRecommendation():
-    print(df_selected)
-
-    # Step 4: Create count matrix from this new combined column
+def getTopTweets(data):
+    # Create count matrix of the target column
     cv = CountVectorizer()
+    count_matrix = cv.fit_transform(data["Text"])
 
-    count_matrix = cv.fit_transform(df_selected["data"])
-
-    # Step 5: Compute cosine similarity based on count_matrix
+    # Compute cosine similarity based on count_matrix
     cosine_sim = cosine_similarity(count_matrix)
 
-    print(cosine_sim)
-    search_phrase_index = 0
+    search_phrase_index = 0 #Target phrase
 
+    # get similar ratio matrix
     similar_tweets = list(enumerate(cosine_sim[search_phrase_index]))
+        # list -> [(0,0.998),(1,0.267),(2,0.777)......
 
-    # Step 7: Get a list of similar tweets in descending order of similarity score
+    # Get a list of similar tweets in descending order of similarity score
     sorted_similar_tweets= sorted(similar_tweets, key=lambda x: x[1], reverse=True)
+        # list -> [(0,0.998),(5,0.867),(2,0.777)......
 
-    print(sorted_similar_tweets)
+    results = [] # to store top 5 tweets
+    if (len(sorted_similar_tweets) > 6):
+        num = 6
+    else:
+        num = len(sorted_similar_tweets)
+    for i in range(1,num):
+        tweet = sorted_similar_tweets[i]
+        tweet = tweet[0]
+        results.append(get_tweet_from_index(tweet,data))
+    return results
 
-    for tweet in sorted_similar_tweets:
-        print(get_tweet_from_index(tweet[0]+2))
+# store top tweet in the Database
+def store_top_tweet(category, user_phrase, toptweet):
+    mydb = client[category]
+    mycol = mydb["TopTweet"]
 
-    toptweet = sorted_similar_tweets[1][0]
-    return toptweet
-
-def runTopTweetRecommender(hashtag):
-    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-    mydb = myclient["SDGP"]
-    mycol = mydb[hashtag]
-
-    df = pd.DataFrame(mycol.find())
-    df = df.drop(columns=['_id'])
-
-    global df_selected
-    df_selected = df.iloc[2:]
-
-
-    toptweet = getRecommendation()
-    # record = [(df.iloc[1][1], get_tweet_from_index(toptweet + 2))]
-    # data_to_append = pd.DataFrame(record)
-    # data_to_append.to_csv("faz.csv", mode='a', header=False)
-
-    category = df.iloc[0]['data']
-
-    resultCol = mydb[category]
-
-    # prev = mycol.find().skip(mycol.count() - 1)
-    prev = resultCol.find_one({},sort=[('_id', pymongo.DESCENDING)])
-    print("latestttt")
+    #get the last index stored on the database
+    prev = mycol.find_one({}, sort=[('_id', pymongo.DESCENDING)])
     latest_index = prev['index']
 
+    #create the dict & insert to database
+    result = {"index": latest_index + 1, "hashtag":user_phrase , "tweet": toptweet}
+    mycol.insert_one(result)
+
+# TOP TWEET RECOMMENDER MAIN CODE
+def runTopTweet(user_phrase,category):
+    #access database get All tweets
+    mydb = client[user_phrase]
+    mycol = mydb["Tweets"]
+    df = pd.DataFrame(mycol.find())
+
+    similarsearches_col = mydb["similarsearches"]
+    similarsearches_df = pd.DataFrame(similarsearches_col.find())
+
+    # to store all similar phrases
+    allSimilarPhrases = ""
+    for i in similarsearches_df["title"]:
+        allSimilarPhrases += i+ " "
+
+    target = {"index": 0, "text": allSimilarPhrases}
+    df = df.append(target,ignore_index=True)
+
+    top5tweets = getTopTweets(df) #get top 5 tweets
+
+    store_top_tweet(category,user_phrase,top5tweets[0]) # store top tweet in the database under relevant category
+
+    # store top 5 tweets in the database
+    mycol = client[user_phrase]
+    col = mycol["topfivetweets"]
+
+    for x in range(1,len(top5tweets)+1):
+        result = {"index": x, "tweet": top5tweets[x-1]}
+        col.insert_one(result)
 
 
-    result = {"index":latest_index+1,"hashtag":df.iloc[1][1], "tweet":get_tweet_from_index(toptweet + 2)}
-
-    print(result)
-    resultCol.insert_one(result)
-
-runTopTweetRecommender("SaveAustralia")
-
+runTopTweet(keywordToSearch,category)
