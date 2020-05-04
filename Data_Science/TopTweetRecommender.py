@@ -3,13 +3,13 @@
 
 #returns the tweet of the given index
 def get_tweet_from_index(index,dataframe):
-    return dataframe[dataframe.index == index]["Text"].values[0]
+    return dataframe[dataframe.index == index]["text"].values[0]
 
 
 def getTopTweets(data):
     # Create count matrix of the target column
     cv = CountVectorizer()
-    count_matrix = cv.fit_transform(data["Text"])
+    count_matrix = cv.fit_transform(data["text"])
 
     # Compute cosine similarity based on count_matrix
     cosine_sim = cosine_similarity(count_matrix)
