@@ -353,6 +353,13 @@ float: left;
   /* background-color:white; */
 }
 
+.line-8{
+  height: 400px;  
+  width: 100%;
+  position: absolute;
+  top:3400px;
+  /* background-color:white; */
+}
 
 .graph-top{
   position: relative;

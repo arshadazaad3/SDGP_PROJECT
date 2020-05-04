@@ -27,6 +27,8 @@ try:
     df=df.head(6)
 except:
     print("Less Than 6 values")
+
+#Convert DataFrame to Dictionary and send values to MongoDb Collection
 data=df
 whatIsSearchedToday=data
 data.reset_index(inplace=True)

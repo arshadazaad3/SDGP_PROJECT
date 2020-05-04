@@ -35,7 +35,6 @@ This is the best place to make API calls since, at this point, the component has
                 <DisappearedLoading size="small"></DisappearedLoading>
 
             </div>
-
         )
 
     }

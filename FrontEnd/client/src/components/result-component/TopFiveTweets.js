@@ -1,13 +1,13 @@
+//impoorting Modules
 import React, { Component } from 'react';
 import axios from 'axios';
-
 import Button from '@material-ui/core/Button';
-
 import Paper from '@material-ui/core/Paper';
 
+
+//constant which populates the array based on the MongoDb Collection scheme
 const TopSearch = props => (
     <div>
-
         <div className="risingSearches">
             <Button variant="outlined" color="primary" style={{ color: 'white' ,fontSize:'11px'}} >
                 {props.topresults.tweet}
@@ -17,7 +17,8 @@ const TopSearch = props => (
     </div >
 )
 
-export default class ExercisesList extends Component {
+//This class displays top 5 tweets from Mongo DB
+export default class TopFiveTweets extends Component {
     constructor(props) {
         super(props);
 
@@ -40,14 +41,14 @@ This is the best place to make API calls since, at this point, the component has
             })
     }
 
-
+//Map the array accoring to its values from MongoDb
     resultList() {
         return this.state.results.map(currentSearch => {
             return <TopSearch topresults={currentSearch} key={currentSearch._id} />
         })
     }
 
-
+//Render displays componenents to the UI
     render() {
         return (
             <div>

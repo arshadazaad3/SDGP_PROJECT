@@ -10,6 +10,9 @@ var dbName;
 /* Each router specifies the url request from React and Post Method takes in values and Get Method
 sends values */
 
+
+/*This Function takes in the search keyword from react and assigns to variable keyword and Two other functions are called
+within this method*/
 router.route('/add').post((req, res) => {
     const searchTerm = req.body.search;
     res.json(searchTerm);
@@ -31,12 +34,14 @@ function  TextClassification() {
         category = String(data);
         console.log("Predicted Category : " + category)
     });
-    
+    //print on console python script output
     ls.stderr.on('data', function (data) {
         console.log('stderr: ' + data);
     });
 
 }
+
+//Route which connects to databse after 5 seconds callback function from React
 
 router.route('/add/load').get((req, res) => {
     connectDatabase()

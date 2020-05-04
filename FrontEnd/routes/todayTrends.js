@@ -35,7 +35,7 @@ function whatsTrendingTodayPython(req, res) {
     var spawn = require("child_process").spawn;
     var process = spawn('python', ["./pyFiles/whatisSearchedToday.py"
     ]);
-
+//log running python file
     console.log("Running PyThon Script [Whats Trending Now]")
 }
 

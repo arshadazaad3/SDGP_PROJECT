@@ -14,6 +14,7 @@ import SimilarSearches from './similarsearches'
 import PredictedEvent from './predictedevents'
 import CategoryRelated from './CategoryRelated'
 import TopFiveTweets from './TopFiveTweets'
+import TopFiveHashtag from './topHashTag'
 import axios from 'axios';
 
 
@@ -86,6 +87,9 @@ class Results extends React.Component {
                 </div>
                 <div className='line-7'>
                     <NewsResults></NewsResults>
+                </div>
+                <div className='line-8'>
+                    <TopFiveHashtag></TopFiveHashtag>
                 </div>
             </div>
         )

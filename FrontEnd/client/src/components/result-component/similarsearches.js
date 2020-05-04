@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 
 import Paper from '@material-ui/core/Paper';
 
+//constant which populates the array based on MongoDb Scheme passed via Axios from NodeJs
 const TopSearch = props => (
     <div>
 
@@ -17,7 +18,7 @@ const TopSearch = props => (
     </div >
 )
 
-export default class ExercisesList extends Component {
+export default class SimilarSearches extends Component {
     constructor(props) {
         super(props);
 
@@ -40,7 +41,7 @@ This is the best place to make API calls since, at this point, the component has
             })
     }
 
-
+    //Fucntions which Maps the arrays values
     resultList() {
         return this.state.results.map(currentSearch => {
             return <TopSearch topresults={currentSearch} key={currentSearch._id} />

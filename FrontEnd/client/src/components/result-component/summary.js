@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-
+//constant which populates the Arrat based on the MongoDB Scheme Passed via Axios from Node js
 const TopSearch = props => (
     <div className="topTrendingRow">
         <Card style={{ width: '30%', backgroundColor: 'transparent', color: 'white' }}>

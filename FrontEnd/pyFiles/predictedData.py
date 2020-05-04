@@ -18,6 +18,8 @@ import nltk
 import pycountry
 import sys
 
+#This class contains the code which interacts with API's such as Twitter, Google , Youtube and Process Them according to 
+#the input
 
 
 #Get Keyword passed from React to Node
